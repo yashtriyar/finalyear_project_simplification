@@ -58,11 +58,18 @@ def extract_text_from_document(document_path):
         return extract_text_from_doc(document_path)
     else:
         raise ValueError(f"Unsupported file format: {file_extension}")
+
+
+st.set_page_config(page_title="Legal Document Analyzer", page_icon="🤖")
+
+st.sidebar.markdown("Created by: Yash Triyar ❤️‍🔥 \nFinal Year Project 2024 \n")
 st.title("Document Summarizer and Analyzer")
 
 # Secure API key input (consider using Streamlit secrets)
 api_key = st.text_input("Enter your Google Gemini API Key", type="password")
 #GOOGLE_API_KEY=google_api_key
+
+
 if api_key:
     llm = ChatGoogleGenerativeAI(model="gemini-pro",google_api_key=api_key)
 # model = genai.GenerativeModel('gemini-pro')
