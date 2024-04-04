@@ -6,7 +6,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 import os
 import docx
 import fitz  
-from comtypes import client
+#from comtypes import client
 import google.generativeai as genai
 from IPython.display import display
 from IPython.display import Markdown
