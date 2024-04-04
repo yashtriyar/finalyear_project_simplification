@@ -1,0 +1,7 @@
+streamlit>=1.15.0 
+langchain_google_genai
+docx
+python-docx
+PyMuPDF>=1.20.0 
+comtypes>=1.1.11
+IPython>=7.34.0 
