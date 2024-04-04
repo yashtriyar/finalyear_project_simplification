@@ -1,6 +1,7 @@
 import streamlit as st
 import pathlib
 import textwrap
+import subprocess
 from langchain_google_genai import ChatGoogleGenerativeAI
 import os
 import docx
@@ -35,13 +36,17 @@ def extract_text_from_pdf(pdf_path):
     return '\n'.join(text)
   
 
+
 def extract_text_from_doc(doc_path):
-    word = client.CreateObject('Word.Application')
-    doc = word.Documents.Open(doc_path)
-    text = doc.Range().Text
-    doc.Close()
-    word.Quit()
-    return text
+    result = subprocess.run(['antiword', doc_path], stdout=subprocess.PIPE, check=True)
+    return result.stdout.decode('utf-8')
+# def extract_text_from_doc(doc_path):
+#     word = client.CreateObject('Word.Application')
+#     doc = word.Documents.Open(doc_path)
+#     text = doc.Range().Text
+#     doc.Close()
+#     word.Quit()
+#     return text
 
 def extract_text_from_document(document_path):
     _, file_extension = os.path.splitext(document_path)
@@ -57,12 +62,15 @@ st.title("Document Summarizer and Analyzer")
 
 # Secure API key input (consider using Streamlit secrets)
 api_key = st.text_input("Enter your Google Gemini API Key", type="password")
-GOOGLE_API_KEY=api_key
-llm = ChatGoogleGenerativeAI(model="gemini-pro",google_api_key=api_key)
+#GOOGLE_API_KEY=google_api_key
+if api_key:
+    llm = ChatGoogleGenerativeAI(model="gemini-pro",google_api_key=api_key)
 # model = genai.GenerativeModel('gemini-pro')
 
+    
+else:
+    st.write("Please enter an API")
 uploaded_file = st.file_uploader("Choose a document (.docx, .pdf, .doc)", type=["docx", "pdf", "doc"])
-
 if uploaded_file is not None:
   file_path = pathlib.Path(uploaded_file.name)
   with open(file_path, 'wb') as f:
