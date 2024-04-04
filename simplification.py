@@ -62,7 +62,8 @@ def extract_text_from_document(document_path):
 
 st.set_page_config(page_title="Legal Document Analyzer", page_icon="🤖")
 
-st.sidebar.markdown("Created by: Yash Triyar ❤️‍🔥 \nFinal Year Project 2024 \n")
+st.sidebar.markdown("Created by: Yash Triyar ❤️‍🔥 ")
+st.sidebar.markdown("Final Year Project 2024 ")
 st.title("Document Summarizer and Analyzer")
 
 # Secure API key input (consider using Streamlit secrets)
